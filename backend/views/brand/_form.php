@@ -46,7 +46,12 @@ EOF
                         console.log(data.msg);
                     } else {
                         $('#logo').val(data.fileUrl);
-                        $('#logo').after('<img src="'+data.fileUrl+'"/>');
+                        if($('#img-logo')){
+                            $('#img-logo').attr('src',data.fileUrl);
+                        }else{
+                             $('#logo').after('<img id='img-logo' src="'+data.fileUrl+'"/>');
+                        }
+
                         console.log(data.fileUrl);
                     }
                 }
