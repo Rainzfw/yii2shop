@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'logo',
                 'value'=>function($model){
-                    return Html::img('http://img.yii2shop.cn'.$model->logo,['style'=>'width:80px;']);
+                    return Html::img($model->logo,['style'=>'width:80px;']);
                 },
                 'format'=>'raw',
             ],
@@ -57,6 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template'=>'{view}{update}{delete}',
+                'header' => '操作',
                 'buttons'=>[
                     'delete'=>function($url,$model,$key){
                         $options=[

@@ -7,6 +7,7 @@
  */
 
 namespace backend\controllers;
+use common\models\GoodsGallery;
 use flyok666\uploadifive\UploadAction;
 use yii\web\Controller;
 use flyok666\qiniu\Qiniu;
@@ -94,7 +95,39 @@ class UploadController extends Controller
                     "imagePathFormat" => "/uedit/{yyyy}{mm}{dd}/{time}{rand:6}",//上传保存路径
                     "imageRoot" => \Yii::getAlias("@data"),
                 ],
-            ]
+            ],
+            'g-upload' => [
+                'class' => UploadAction::className(),
+                'basePath' => '@data',//修改了图片保存的路径
+                'baseUrl' => "@dataweb",
+                'enableCsrf' => true, // default
+                'postFieldName' => 'Filedata', // default
+                'overwriteIfExist' => true,
+                'format' => function (UploadAction $action) {
+                    $fileext = $action->uploadfile->getExtension();
+                    $filename = date('Ymd',time()).'/'.sha1_file($action->uploadfile->tempName);
+                    return "{$filename}.{$fileext}";
+                },
+                'validateOptions' => [
+                    'extensions' => ['jpg', 'png','gif','bmp'],
+                    'maxSize' => 1 * 1024 * 1024,
+                ],
+                'beforeValidate' => function (UploadAction $action) {
+                    //throw new Exception('test error');
+                },
+                'afterValidate' => function (UploadAction $action) {},
+                'beforeSave' => function (UploadAction $action) {},
+                'afterSave' => function (UploadAction $action) {
+                    //将图片路径保存在相册表中
+                    $gallery = new GoodsGallery();
+                    $gallery->goods_id = \Yii::$app->request->get('goods_id');
+                    $gallery->img_url=$action->getWebUrl();
+                    $gallery->save();
+                    $action->output['fileUrl'] = $action->getWebUrl();
+                    $action->output['gallery_id'] = $gallery->id;
+
+                },
+            ],
         ];
     }
 }

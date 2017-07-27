@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'id',
+            ['class' => 'yii\grid\SerialColumn'],
             'name',
             [
                 'attribute'=>'article_category_id',
@@ -38,7 +38,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'create:datetime',
             [
                 'class' => 'yii\grid\ActionColumn',
+                'template'=>'{view}{update}{delete}',
                 'header' => '操作',
+                'buttons'=>[
+                    'delete'=>function($url,$model,$key){
+                        $options=[
+                            'title'=>Yii::t('yii','删除'),
+                            'aria-label'=>Yii::t('yii','删除'),
+                            'data-confirm'=>Yii::t('yii','你确定删除么?'),
+                            'data-method'=>'post',
+                            'data-pjax'=>'0',
+                        ];
+                        return Html::a("<span class='glyphicon glyphicon-trash'></span>",$url,$options);
+                    },
+                ],
             ],
         ],
     ]); ?>

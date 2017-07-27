@@ -4,6 +4,7 @@ return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
+    'imgUrl'=>'http://img.yii2shop.cn',
     'qiniu'=>[
         'accessKey'=>'xgc9EWCl7QkjHYpZqiegX7gIAkiVOT0llFU0FwdH',
         'secretKey'=>'IVWfkg5dOaqKDx9GaStnbrPOqvbpupexlSwfA7XK',

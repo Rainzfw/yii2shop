@@ -18,7 +18,6 @@ use \yii\web\JsExpression;
     <?= $form->field($model, 'intro')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'logo')->hiddenInput(['id'=>'logo'])?>
-    <?/*= $form->field($model, 'imgFile')->fileInput()*/?>
     <!--定义一个外部标签-->
     <?=Html::fileInput('img',null,['id'=>'img'])?>
     <!--上传小部件主体-->
@@ -49,7 +48,7 @@ EOF
                         if($('#img-logo')){
                             $('#img-logo').attr('src',data.fileUrl);
                         }else{
-                             $('#logo').after('<img id='img-logo' src="'+data.fileUrl+'"/>');
+                             $('#logo').after('<img id="img-logo" src="'+data.fileUrl+'"/>');
                         }
 
                         console.log(data.fileUrl);
@@ -61,7 +60,7 @@ EOF
     ]);?>
     <?php
         if(!$model->isNewRecord && $model->logo){
-            echo Html::img('http://img.yii2shop.cn'.$model->logo,['style'=>'width:80px;']);
+            echo Html::img($model->logo,['id'=>'img-logo','style'=>'width:80px;']);
         }
     ?>
 
