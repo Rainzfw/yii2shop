@@ -6,6 +6,7 @@ use backend\models\resetPwd;
 use Yii;
 use backend\models\Admin;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
@@ -87,7 +88,7 @@ class AdminController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $model->roles = ArrayHelper::map(Yii::$app->authManager->getRoles(),'name','name');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

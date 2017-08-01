@@ -15,6 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'username')->textInput() ?>
     <?= $form->field($model, 'password')->passwordInput() ?>
     <?= $form->field($model, 'email')->textInput() ?>
+    <?= $form->field($model, 'roles')->checkboxList(\yii\helpers\ArrayHelper::map(Yii::$app->authManager->getRoles(),'name','name'));?>
     <?= $form->field($model, 'codeCaptcha')->widget(\yii\captcha\Captcha::className(),['imageOptions'=>['alt'=>'点击换图','title'=>'点击换图', 'style'=>'cursor:pointer']])?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

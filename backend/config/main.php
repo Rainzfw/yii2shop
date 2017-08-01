@@ -45,10 +45,6 @@ return [
             ],
         ],
         */
-        //基于角色的权限管理
-        'authManager'=>[
-            'class'=>\yii\rbac\DbManager::className()
-        ]
     ],
     'params' => $params,
 ];

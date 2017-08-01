@@ -9,6 +9,7 @@ class Admin extends User
 
     public $password;
     public $codeCaptcha;
+    public $roles;
     private static $statusarr=[
         self::STATUS_ACTIVE=>'正常',
         self::STATUS_DELETED=>'删除'
@@ -20,7 +21,7 @@ class Admin extends User
 
     public function rules(){
         return [
-            [['username','password','email'], 'required'],
+            [['username','password','email','roles'], 'required'],
             [['created_at', 'updated_at','status'], 'integer'],
             [['email','username'], 'unique'],//不能直接在页面验证
             ['codeCaptcha', 'captcha'],//验证验证码
@@ -53,6 +54,7 @@ class Admin extends User
         $this->updated_at = time();
         return parent::beforeSave($insert);
     }
+
     //获取用户状态
     public function getStatustext(){
         if(array_key_exists($this->status,self::$statusarr)){
@@ -62,6 +64,26 @@ class Admin extends User
     }
     public static  function getStatusarr(){
         return self::$statusarr;
+    }
+
+
+    public function afterSave($insert,$changedAttributes){
+
+        $authManager = \Yii::$app->authManager;
+        //添加用户角色
+        if(!$insert){
+            //删除用户已有的角色
+            $authManager->revokeAll($this->id);
+        }
+        if(is_array($this->roles)){
+            foreach($this->roles as $role){
+                $role = $authManager->getRole($role);
+                if($role){
+                    $authManager->assign($role,$this->id);
+                }
+            }
+        }
+        return parent::afterSave($insert,$changedAttributes);
     }
 
 }
