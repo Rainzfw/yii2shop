@@ -11,8 +11,11 @@ $this->title = '登录';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
+
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <h1 style="text-align:center">登 录 Yii2shop</h1>
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
@@ -28,5 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php ActiveForm::end(); ?>
         </div>
+        <div class="col-lg-3"></div>
     </div>
 </div>

@@ -55,18 +55,14 @@ class Menu extends \yii\db\ActiveRecord
         ];
     }
     //获取所有的菜单
-    public static function getMenus($isDroplist=true,$parent_id=0,$lavel=0){
-        if($isDroplist){
-            static $menusArr =[['id'=>0,'nametext'=>'顶级菜单']];
-        }else{
-            static $menusArr =[];
-        }
+    public static function getMenus($parent_id=0,$lavel=0){
+        static $menusArr =[['id'=>0,'nametext'=>'顶级菜单']];
         $menus = self::find()->where(['parent_id'=>$parent_id])->asArray()->all();
         if($menus){
             foreach($menus as $menu){
                 $menu['nametext'] = str_repeat('--',$lavel).$menu['name'];
                 $menusArr[] = $menu;
-                self::getMenus($isDroplist,$menu['id'],$menu['lavel']+1);
+                self::getMenus($menu['id'],$menu['lavel']+1);
             }
         }
         return $menusArr;

@@ -9,8 +9,10 @@
             </div>
             <div class="pull-left info">
                 <p>Alexander Pierce</p>
-
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="#">
+                    <i class="fa  <?php echo Yii::$app->user->isGuest?'fa-circle text-danger':'fa-circle text-success'?>"></i>
+                    <?php echo Yii::$app->user->isGuest?'Offline':'Online'?>
+                </a>
             </div>
         </div>
 

@@ -13,7 +13,7 @@ use yii\data\ArrayDataProvider;
 /**
  * MenuController implements the CRUD actions for Menu model.
  */
-class MenuController extends BaseController
+class MenuController extends Controller
 {
     /**
      * Lists all Menu models.
