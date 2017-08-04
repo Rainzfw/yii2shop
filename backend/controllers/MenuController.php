@@ -21,6 +21,7 @@ class MenuController extends Controller
      */
     public function actionIndex()
     {
+
         $dataProvider= new ArrayDataProvider(
             [
                 'allModels' => Menu::getMenus(false),

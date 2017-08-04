@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "menu".
@@ -101,7 +102,7 @@ class Menu extends \yii\db\ActiveRecord
         $items = self::find()->select(['id','name','route','parent_id','lavel','icon'])->asArray()->all();
         if($items){
             foreach($items as $item){
-                $tmp = ['label' => $item['name'], 'icon' => $item['icon'], 'url' => $item['route']? $item['route']:'#'];
+                $tmp = ['label' => $item['name'], 'icon' => $item['icon'], 'url' => $item['route']? Url::to([$item['route']]):'#'];
                 //顶级菜单
                 switch($item['lavel']){
                     case 0:
