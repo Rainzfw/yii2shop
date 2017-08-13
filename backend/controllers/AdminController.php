@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\resetPwd;
+use backend\models\ResetPwd;
 use Yii;
 use backend\models\Admin;
 use yii\data\ActiveDataProvider;
@@ -117,7 +117,7 @@ class AdminController extends Controller
         if(!Yii::$app->user->identity){
             throw new HttpException('未登录!');
         }
-        $model =new resetPwd();
+        $model =new ResetPwd();
         $adminModel = Admin::findOne(Yii::$app->user->identity->id);
         //$adminModel = Admin::findOne(1);
         if(Yii::$app->request->isPost){

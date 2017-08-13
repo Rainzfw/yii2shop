@@ -11,7 +11,7 @@ namespace backend\models;
 
 use yii\base\Model;
 
-class resetPwd extends Model
+class ResetPwd extends Model
 {
     public $old_password;
     public $new_password1;

@@ -106,4 +106,5 @@ class Goods extends \yii\db\ActiveRecord
     public function getGoodsintro(){
         return $this->hasOne(GoodsIntro::className(),['goods_id'=>'id']);
     }
+
 }

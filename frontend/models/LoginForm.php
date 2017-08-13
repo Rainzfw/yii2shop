@@ -2,15 +2,14 @@
 namespace frontend\models;
 
 use yii\base\Model;
-use common\models\User;
+use frontend\models\User;
 
 /**
- * Signup form
+ * Login form
  */
-class SignupForm extends Model
+class LoginForm extends Model
 {
     public $username;
-    public $email;
     public $password;
 
 
@@ -24,35 +23,30 @@ class SignupForm extends Model
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
-
-            ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
         ];
     }
 
     /**
-     * Signs user up.
+     * 登录
      *
      * @return User|null the saved model or null if saving fails
      */
-    public function signup()
+    public function login()
     {
         if (!$this->validate()) {
             return null;
         }
-        
-        $user = new User();
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        
-        return $user->save() ? $user : null;
+        $user = User::findOne(['username'=>$this->username]);
+        if(!$user){
+            $this->addError(['password'=>'用户不存在']);
+            return null;
+        }
+        if(!\Yii::$app->security->validatePassword($this->password,$user->password_hash)){
+            $this->addError(['password'=>'密码错误']);
+            return null;
+        }
+        return $user;
     }
 }

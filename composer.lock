@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "72a989beec2cdfa3388aa6bb76f141b4",
+    "content-hash": "a61ee467ac8b8e7c5a373e1c5ffebf26",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -389,6 +389,48 @@
                 "yii2"
             ],
             "time": "2015-01-27T10:53:51+00:00"
+        },
+        {
+            "name": "dankal/dk-alidayu",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fiochen/dk-alidayu.git",
+                "reference": "51f4b652fa248a946cc258ba88929ee0fd33f52d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/fiochen/dk-alidayu/51f4b652fa248a946cc258ba88929ee0fd33f52d.zip",
+                "reference": "51f4b652fa248a946cc258ba88929ee0fd33f52d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dankal\\DkAlidayu\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "fio",
+                    "homepage": "http://www.dankal.cn",
+                    "role": "Developer"
+                }
+            ],
+            "description": "阿里大于 - 短信sdk",
+            "homepage": "https://github.com/fiochen/dk-alidayu",
+            "keywords": [
+                "alidayu",
+                "dankal"
+            ],
+            "time": "2017-07-11T09:37:54+00:00"
         },
         {
             "name": "dmstr/yii2-adminlte-asset",
